@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoBrowse — Browse Our Cars</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+<div class="nav">
+    <div class="brand"><span class="logo-dot"></span> AutoBrowse</div>
+    <div class="nav-links">
+    <a href="#" onclick="return false;">Home</a>
+    <a href="#" onclick="return false;">Find your car</a>
+    </div>
+    <button class="contact-btn">CONTACT</button>
+</div>
+<div class="hero">
+    <h1>Browse our cars</h1>
+    <div class="search-bar">
+    <input id="searchInput" type="text" placeholder="Search by make, model or body type…" autocomplete="off">
+    <button id="searchBtn" aria-label="Search">🔍</button>
+    </div>
+</div>
+</header>
+
+<main>
+<div class="toolbar">
+    <div class="results-title" id="resultsTitle">All cars <span class="results-count" id="resultsCount"></span></div>
+</div>
+
+<div style="display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start;">
+    <div class="filters">
+    <div class="filter-row">
+        <div class="filter-label"><span>Price range</span><span id="priceLabel"></span></div>
+        <div class="range-wrap">
+        <input type="range" id="priceMin" min="0" max="100000" step="500" value="0">
+        <input type="range" id="priceMax" min="0" max="100000" step="500" value="100000">
+        </div>
+        <div class="price-values"><span> $0 </span><span> $100,000 </span></div>
+    </div>
+
+    <div class="filter-row">
+        <div class="filter-label">Body type</div>
+        <div class="chip-row" id="bodyChips"></div>
+    </div>
+
+    <div class="filter-row">
+        <div class="filter-label">Transmission</div>
+        <select id="transSelect">
+        <option value="">Any</option>
+        </select>
+    </div>
+
+    <div class="filter-row">
+        <div class="filter-label">Sort by</div>
+        <select id="sortSelect">
+        <option value="relevance">Relevance</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="km-asc">Mileage: Low to High</option>
+        <option value="year-desc">Year: Newest first</option>
+        </select>
+    </div>
+
+    <button class="reset-btn" id="resetBtn">Reset filters</button>
+    </div>
+
+    <div style="flex:3; min-width:280px;">
+    <div class="grid" id="grid"></div>
+    </div>
+</div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
