@@ -1,33 +1,25 @@
-const CarAPI = (() => {
-    const DB = [
-        { id: 1, make: "Toyota", model: "Kluger", year: 2016, km: 171931, body: "Wagon", trans: "Automatic", price: 29880, img: "https://images.carexpert.com.au/resize/800/-/cms/v1/media/2026-toyota-kluger-grande-hero.png?auto=format&fit=crop&w=600&q=60"},
-        { id: 2, make: "Toyota", model: "Aurion", year: 2012, km: 256681, body: "Sedan", trans: "Auto Sequential", price: 14120, img: "https://static0.carbuzzimages.com/wordpress/wp-content/uploads/2025/09/2012_toyota_aurion_front.jpg?q=49&fit=crop&w=825&dpr=2?auto=format&fit=crop&w=600&q=60"},
-        { id: 3, make: "Toyota", model: "RAV4", year: 2016, km: 93651, body: "Wagon", trans: "Automatic", price: 26086, img: "https://hips.hearstapps.com/mtg-prod/65a721355eb9780008af4375/2016-toyota-rav4-hybrid-front-three-quarter-view.jpg?auto=format&fit=crop&w=600&q=60"},
-        { id: 4, make: "Toyota", model: "Kluger", year: 2008, km: 210344, body: "Wagon", trans: "Automatic", price: 12990, img: "https://images-archive.allbids.com.au/auctions/43100/cars/medium/43100-1a_ex.JPG?auto=format&fit=crop&w=600&q=60"},
-        { id: 5, make: "Toyota", model: "Camry", year: 2015, km: 132400, body: "Sedan", trans: "Automatic", price: 17490, img: "https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/images/14q3/612022/2015-toyota-camry-first-drive-review-car-and-driver-photo-628681-s-original.jpg?auto=format&fit=crop&w=600&q=60"},
-        { id: 6, make: "Toyota", model: "Yaris", year: 2013, km: 98220, body: "Hatchback", trans: "Manual", price: 9990, img: "https://img2.carmax.com/assets/mmy-toyota-yaris-2013/image/1.jpg?width=800&height=600?auto=format&fit=crop&w=600&q=60"},
-        { id: 7, make: "Mazda", model: "CX-5", year: 2019, km: 61200, body: "Wagon", trans: "Automatic", price: 31490, img: "https://file.kelleybluebookimages.com/kbb/base/evox/CP/11980/2019-MAZDA-CX-5-front_11980_032_2400x1800_25D.png?auto=format&fit=crop&w=600&q=60"},
-        { id: 8, make: "Honda", model: "Civic", year: 2017, km: 78450, body: "Sedan", trans: "Automatic", price: 18990, img: "https://di-uploads-pod3.dealerinspire.com/sussexhonda/uploads/2017/07/2017-Civic-Sedan.png?auto=format&fit=crop&w=600&q=60"},
-        { id: 9, make: "Ford", model: "Ranger", year: 2020, km: 45210, body: "Ute", trans: "Automatic", price: 44990, img: "https://images.hgmsites.net/lrg/2020-ford-ranger-xlt-4wd-supercrew-5-box-angular-front-exterior-view_100741418_l.jpg?auto=format&fit=crop&w=600&q=60"},
-        { id: 10, make: "Hyundai", model: "i30", year: 2018, km: 55200, body: "Hatchback", trans: "Automatic", price: 16990, img: "https://i0.wp.com/practicalmotoring.com.au/wp-content/uploads/2017/08/image154584_b.jpg?fit=1024%2C682&ssl=1?auto=format&fit=crop&w=600&q=60"},
-        { id: 11, make: "Subaru", model: "Outback", year: 2019, km: 39800, body: "Wagon", trans: "Automatic", price: 33990, img: "https://platform.cstatic-images.com/in/v2/stock_photos/45b6456c-7ebd-4a23-abaf-ef5b8650f873/15631f7b-8685-4367-968f-33c0edd72149.png?auto=format&fit=crop&w=600&q=60"},
-        { id: 12, make: "Nissan", model: "Navara", year: 2021, km: 22100, body: "Ute", trans: "Automatic", price: 47990, img: "https://www.carnichiwa.com/wp-content/uploads/2020/11/21NSNAV1000.jpeg?auto=format&fit=crop&w=600&q=60"},
-        { id: 13, make: "Toyota", model: "Prius", year: 2015, km: 151931, body: "Hatchback", trans: "Automatic", price: 18990, img: "https://images.hgmsites.net/hug/2015-toyota-prius-5dr-hb-three-natl-angular-front-exterior-view_100485217_h.jpg?auto=format&fit=crop&w=600&q=60"},
-        { id: 14, make: "MINI Cooper", model: "Cooper", year: 2024, km: 20100, body: "Hatchback", trans: "Manual", price: 17990, img: "https://crdms.images.consumerreports.org/c_lfill,w_563,q_auto,f_auto/prod/cars/cr/car-versions/12566-2019-mini-cooper-s?auto=format&fit=crop&w=600&q=60"},
-        { id: 15, make: "Tesla", model: "Model Y", year: 2020, km: 111931, body: "SUV", trans: "Automatic", price: 39990, img: "https://cars.usnews.com/static/images/Auto/izmo/i159615040/2020_tesla_model_y_angularfront.jpg?auto=format&fit=crop&w=600&q=60"},
-    ];
+const API_URL = "https://api.jsonbin.io/v3/b/6abaad90ac6210605afeeae5/latest";
+let cache = null;
 
-    function fetchListings(params = {}) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                let results = DB.slice();
-                const { query, minPrice, maxPrice, body, trans, sort } = params;
+async function loadAll(){
+    if (!cache) {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        const json = await res.json();
+        cache = Array.isArray(json) ? json : json.record;
+    }
+    return cache;
+}
 
-                if (query) {
-                    const q = query.trim().toLowerCase();
-                    results = results.filter(c =>
-                        `${c.make} ${c.model} ${c.body}`.toLowerCase().includes(q)
-                    );
+const CarAPI = {
+    async fetchListings(params = {}) {
+        let results = (await loadAll()).slice();
+        const { query, minPrice, maxPrice, body, trans, sort } = params;
+
+            if (query) {
+                const q = query.trim().toLowerCase();
+                results = results.filter(c =>
+                    `${c.make} ${c.model} ${c.body}`.toLowerCase().includes(q));
                 }
                 if (minPrice != null) results = results.filter(c => c.price >= minPrice);
                 if (maxPrice != null) results = results.filter(c => c.price <= maxPrice);
@@ -40,19 +32,17 @@ const CarAPI = (() => {
                     case "km-asc": results.sort((a,b) => a.km - b.km); break;
                     case "year-desc": results.sort((a,b) => b.year - a.price); break;
                 }
-                resolve(results);
-            }, 150);
-        });
-    }
+                return results;
+            },
 
-    function getFacets() {
-        const bodies = [...new Set(DB.map(c => c.body))];
-        const transmissions = [...new Set(DB.map(c => c.trans))];
-        return { bodies, transmissions };
-    }
-
-    return { fetchListings, getFacets };
-})();
+            async getFacets() {
+                const DB = await loadAll();
+                return {
+                    bodies: [...new Set(DB.map(c => c.body))],
+                    transmissions: [...new Set(DB.map(c => c.trans))]
+            };
+        }
+};
 
 const state = {
     query: "",
@@ -79,8 +69,8 @@ const resetBtn = document.getElementById('resetBtn');
 function fmtMoney(n) { return '$' + n.toLocaleString(); }
 function fmtKm(n) { return n.toLocaleString() + ' km'; }
 
-function buildFacets() {
-    const { bodies, transmissions } = CarAPI.getFacets();
+async function buildFacets() {
+    const { bodies, transmissions } = await CarAPI.getFacets();
     bodyChips.innerHTML = `<div class="chip active" data-val="">All</div>` +
         bodies.map(b => `<div class="chip" data-val="${b}">${b}</div>`).join('');
     bodyChips.querySelectorAll('.chip').forEach(chip => {
