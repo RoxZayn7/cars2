@@ -401,9 +401,77 @@ spec-line {
 
     .contact-btn {
         padding: 8px 16px;
+        font-size: 0.78rem;
     }
 
-    .font-size {
-        
+    .hero {
+        padding: 24px 0 40px;
+    }
+
+    .hero h1 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .search-bar {
+        padding: 4px 6px 4px 18px;
+    }
+
+    .search-bar input {
+        font-size: 0.95rem;
+        padding: 10px 0;
+    }
+
+    .search-bar button {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .toolbar {
+        margin-bottom: 18px;
+    }
+
+    .results-title {
+        font-size: 1.15rem;
+    }
+
+    .filters {
+        padding: 16px 18px;
+    }
+
+    .chip {
+        padding: 5px 12px;
+        font-size: 0.78rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 20px;
+    }
+
+    .card-img {
+        height: 200px;
+    }
+
+    .range-wrap {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero h1 {
+        font-size: 1.4rem;
+    }
+
+    .card-title {
+        font-size: 0.95rem;
+    }
+
+    .card-price {
+        font-size: 1.1rem;
     }
 }
