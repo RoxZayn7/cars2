@@ -145,6 +145,13 @@ main {
     margin-bottom: 8px;
 }
 
+.layout {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
 .results-title {
     font-size: 1.4rem;
     font-weight: 700;
@@ -163,7 +170,7 @@ main {
     border-radius: var(--radius);
     padding: 18px 24px;
     min-width: 320px;
-    flex: 1;
+    flex: 1 1 280px;
     max-width: 420px;
 }
 
@@ -254,7 +261,7 @@ select {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 24px;
     margin-top: 28px;
 }
@@ -308,6 +315,11 @@ spec-line {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--text);
+}
+
+.results-panel {
+    flex: 3 1 500px;
+    min-width: 0;
 }
 
 .no-results {
