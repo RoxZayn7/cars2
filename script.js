@@ -12,6 +12,9 @@ const CarAPI = (() => {
         { id: 10, make: "Hyundai", model: "i30", year: 2018, km: 55200, body: "Hatchback", trans: "Automatic", price: 16990, img: "https://i0.wp.com/practicalmotoring.com.au/wp-content/uploads/2017/08/image154584_b.jpg?fit=1024%2C682&ssl=1?auto=format&fit=crop&w=600&q=60"},
         { id: 11, make: "Subaru", model: "Outback", year: 2019, km: 39800, body: "Wagon", trans: "Automatic", price: 33990, img: "https://platform.cstatic-images.com/in/v2/stock_photos/45b6456c-7ebd-4a23-abaf-ef5b8650f873/15631f7b-8685-4367-968f-33c0edd72149.png?auto=format&fit=crop&w=600&q=60"},
         { id: 12, make: "Nissan", model: "Navara", year: 2021, km: 22100, body: "Ute", trans: "Automatic", price: 47990, img: "https://www.carnichiwa.com/wp-content/uploads/2020/11/21NSNAV1000.jpeg?auto=format&fit=crop&w=600&q=60"},
+        { id: 13, make: "Toyota", model: "Prius", year: 2015, km: 151931, body: "Hatchback", trans: "Automatic", price: 18990, img: "https://images.hgmsites.net/hug/2015-toyota-prius-5dr-hb-three-natl-angular-front-exterior-view_100485217_h.jpg?auto=format&fit=crop&w=600&q=60"},
+        { id: 14, make: "MINI Cooper", model: "Cooper", year: 2024, km: 20100, body: "Hatchback", trans: "Manual", price: 17990, img: "https://crdms.images.consumerreports.org/c_lfill,w_563,q_auto,f_auto/prod/cars/cr/car-versions/12566-2019-mini-cooper-s?auto=format&fit=crop&w=600&q=60"},
+        { id: 15, make: "Tesla", model: "Model Y", year: 2020, km: 111931, body: "SUV", trans: "Automatic", price: 39990, img: "https://cars.usnews.com/static/images/Auto/izmo/i159615040/2020_tesla_model_y_angularfront.jpg?auto=format&fit=crop&w=600&q=60"},
     ];
 
     function fetchListings(params = {}) {
